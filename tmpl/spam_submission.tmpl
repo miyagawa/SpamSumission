@@ -1,0 +1,38 @@
+<script type="text/javascript">
+function toggleAuthDetails(name) {
+    var list = [ 'apikey', 'typekey' ];
+    for (i = 0; i < list.length; i++) {
+        n = list[i];
+        if (n == name) {
+            document.getElementById(n).style.display = 'block';
+        } else {
+            document.getElementById(n).style.display = 'none';
+        }
+    }
+}
+</script>
+<div class="setting grouped">
+<div class="label">API Auth Type:</div>
+<div class="field">
+<input type="radio" name="auth_type" value="apikey" <TMPL_IF NAME=AUTH_TYPE_APIKEY>checked="checked"</TMPL_IF> onclick="toggleAuthDetails('apikey')" />Bulkfeeds API Key
+<input type="radio" name="auth_type" value="typekey" <TMPL_IF NAME=AUTH_TYPE_TYPEKEY>checked="checked"</TMPL_IF> onclick="toggleAuthDetails('typekey')" />TypeKey
+</div>
+</div>
+
+<div id="apikey" class="setting grouped">
+<div class="label"><nobr>Bulkfeeds API Key:</nobr></div>
+
+<div class="field"><input type="text" name="apikey" size="36" value="<TMPL_VAR NAME=APIKEY ESCAPE=HTML>" />
+</div>
+</div>
+
+
+<div id="typekey" class="setting grouped">
+<div class="label">TypeKey Auth:</div>
+<div class="field">Username: <input type="text" name="typekey_username" size="12" value="<TMPL_VAR NAME=TYPEKEY_USERNAME ESCAPE=HTML>" /><br />
+Password: <input type="password" name="typekey_password" size="12" value="<TMPL_VAR NAME=TYPEKEY_PASSWORD ESCAPE=HTML>" />
+</div>
+</div>
+
+
+<script type="text/javascript">toggleAuthDetails('<TMPL_VAR NAME=AUTH_TYPE>');</script>
